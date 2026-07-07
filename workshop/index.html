@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multi-Channel AI Agent Workshop</title>
+    <link rel="icon" type="image/x-icon" href="https://assets.twilio.com/public_assets/paste-theme-package/10.20.0/favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#chapter-0" aria-label="Workshop home">
+          <span class="brand-mark">T</span>
+          <span>multi-channel-ai-agent</span>
+        </a>
+        <nav class="chapter-tabs" id="chapterTabs" aria-label="Workshop chapters"></nav>
+        <div class="top-actions">
+          <button class="icon-button" type="button" id="resetProgress" aria-label="Reset progress" title="Reset progress">
+            <span aria-hidden="true">↺</span>
+          </button>
+          <button class="icon-button" type="button" id="themeToggle" aria-label="Switch to light mode">
+            <span id="themeIcon" aria-hidden="true">☀️</span>
+          </button>
+        </div>
+      </header>
+
+      <aside class="side-rail" aria-label="Chapter steps">
+        <p class="chapter-kicker" id="chapterKicker">Chapter</p>
+        <h1 id="chapterTitle">Loading workshop</h1>
+        <p id="chapterSummary">Reading markdown content...</p>
+        <nav class="step-list" id="stepList" aria-label="Steps in this chapter"></nav>
+      </aside>
+
+      <main class="content" id="content" tabindex="-1">
+        <section class="chapter-content" id="chapterContent" aria-live="polite"></section>
+      </main>
+
+      <footer class="progress-bar" aria-label="Workshop progress">
+        <button class="footer-nav" type="button" id="prevStep">Previous</button>
+        <div class="progress-center">
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <div id="progressLabel">Loading...</div>
+        </div>
+        <button class="footer-nav" type="button" id="nextStep">Next</button>
+      </footer>
+
+      <div class="modal-backdrop" id="resetDialog" role="dialog" aria-modal="true" aria-labelledby="resetDialogTitle" hidden>
+        <div class="confirm-dialog">
+          <p class="eyebrow">Reset progress</p>
+          <h2 id="resetDialogTitle">Clear all completed steps?</h2>
+          <p>This will unmark every step in the workshop. Your current chapter, step, and theme will stay the same.</p>
+          <div class="dialog-actions">
+            <button class="dialog-button" type="button" id="cancelReset">Cancel</button>
+            <button class="dialog-button danger" type="button" id="confirmReset">Reset progress</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="components/system-overview.js" defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>

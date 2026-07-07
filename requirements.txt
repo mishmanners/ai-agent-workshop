@@ -1,0 +1,14 @@
+# Twilio Agent Connect SDK with FastAPI server support
+twilio-agent-connect[server]==2.0.0
+
+# OpenAI Python SDK
+openai==2.43.0
+
+# Environment variable management
+python-dotenv==1.2.2
+
+# HTTP client for startup configuration checks
+httpx==0.28.1
+
+# Optional: Development tools
+# pytest==8.4.2

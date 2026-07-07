@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build a Multi-Channel AI Agent</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="deck" aria-live="polite">
+      <section class="slide title-slide active">
+        <div class="canvas">
+          <div class="content title-content">
+            <div class="title-copy">
+              <p class="eyebrow">Workshop</p>
+              <h1>Build a Multi-Channel AI Agent</h1>
+              <p class="subtitle">
+                Using Python, Twilio Agent Connect (TAC) and OpenAI
+                <span>(bring your own API key)</span>
+              </p>
+            </div>
+            <div class="footer">
+              <span></span>
+              <span>July 2026</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="canvas">
+          <div class="content stack">
+            <div>
+              <p class="eyebrow">Your workshop team</p>
+              <h2>Builders helping builders.</h2>
+            </div>
+            <div class="team-grid">
+              <article class="person">
+                <img src="../assets/team/anni.png" alt="Anni" />
+                <div class="person-info">
+                  <strong>Anni</strong>
+                  <span>Developer Evangelist</span>
+                </div>
+              </article>
+              <article class="person">
+                <img src="../assets/team/kaustav.jpg" alt="Kaustav" />
+                <div class="person-info">
+                  <strong>Kaustav</strong>
+                  <span>Developer Evangelist</span>
+                </div>
+              </article>
+              <article class="person">
+                <img src="../assets/team/ana.jpg" alt="Ana" />
+                <div class="person-info">
+                  <strong>Ana</strong>
+                  <span>Developer Educator</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="slide">
+        <div class="canvas">
+          <div class="content stack problem-fragment-layout">
+            <div>
+              <p class="eyebrow">Problem</p>
+              <h2>Customers remember. Agents forget.</h2>
+            </div>
+            <div class="problem-fragment-grid">
+              <div class="fragment-panel">
+                <p class="stage-label">What the system sees</p>
+                <div class="fragmented-flow">
+                  <div class="memory-row">
+                    <div class="node channel-node">Web Chat</div>
+                    <div class="broken-arrow">></div>
+                    <div class="node session-node">Session 1</div>
+                    <div class="memory-chip">Memory A</div>
+                  </div>
+                  <div class="memory-row">
+                    <div class="node channel-node">Voice</div>
+                    <div class="broken-arrow">></div>
+                    <div class="node session-node">Session 2</div>
+                    <div class="memory-chip">Memory B</div>
+                  </div>
+                  <div class="memory-row">
+                    <div class="node channel-node">...</div>
+                    <div class="broken-arrow">></div>
+                    <div class="node session-node">Session 3</div>
+                    <div class="memory-chip">Memory C</div>
+                  </div>
+                </div>
+                <div class="warning-strip">
+                  <span>Who is this?</span>
+                  <span>Context lost</span>
+                  <span>Repeat yourself</span>
+                </div>
+              </div>
+              <div class="pain-stack">
+                <article class="problem-audience-card business-pain">
+                  <span class="badge">Business pain</span>
+                  <h3>Fragmented conversations create fragmented experiences.</h3>
+                </article>
+                <article class="problem-audience-card developer-pain">
+                  <span class="badge">Developer pain</span>
+                  <h3>Continuity becomes custom glue code.</h3>
+                </article>
+              </div>
+            </div>
+            <p class="problem-note">
+              The model is only part of the agent. The hard part is keeping context intact.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="slide">
+        <div class="canvas">
+          <div class="content stack continuity-layout">
+            <div>
+              <p class="eyebrow">Solution</p>
+              <h2>Add a continuity layer between channels and your agent.</h2>
+            </div>
+            <div class="continuity-diagram">
+              <div class="continuity-channels">
+                <p class="stage-label">Customer shows up anywhere</p>
+                <div class="channel-pill">SMS</div>
+                <div class="channel-pill">Voice</div>
+                <div class="channel-pill">Web Chat</div>
+              </div>
+              <div class="continuity-arrow">></div>
+              <div class="continuity-hub">
+                <p class="stage-label">Twilio Agent Connect</p>
+                <h3>Shared context</h3>
+                <div class="context-grid">
+                  <span>Identity</span>
+                  <span>Memory</span>
+                  <span>Routing</span>
+                  <span>Channel state</span>
+                </div>
+              </div>
+              <div class="continuity-arrow">></div>
+              <div class="continuity-agent">
+                <p class="stage-label">Your app</p>
+                <div class="node handler-node">One agent handler</div>
+                <p>Receives the context it needs before every reply.</p>
+              </div>
+            </div>
+            <div class="footer">
+              <span>Less custom glue code.</span>
+              <span>More consistent customer experience.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="slide">
+        <div class="canvas">
+          <div class="content demo-layout">
+            <div>
+              <p class="eyebrow">Demo</p>
+              <h2>Let’s see the agent in action.</h2>
+            </div>
+            <div class="demo-strip" aria-hidden="true">
+              <span>SMS</span>
+              <span>Voice</span>
+              <span>Web Chat</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="canvas">
+          <div class="content build-layout">
+            <div>
+              <p class="eyebrow">Your mission today</p>
+              <h2>Build An AI Agent Who Remembers You</h2>
+            </div>
+            <div class="build-answer">
+              <span>What</span>
+              <p>
+                One Python app that works across SMS, Voice, and Web Chat with
+                shared memory.
+              </p>
+            </div>
+            <div class="build-tools">
+              <span>Tools</span>
+              <p>Python · FastAPI · Twilio Agent Connect · OpenAI</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="canvas">
+          <div class="content workshop-layout">
+            <div>
+              <p class="eyebrow">Workshop structure</p>
+            </div>
+            <div class="section-list">
+              <div><span>01</span><p>See the agent</p></div>
+              <div><span>02</span><p>Setup & environment</p></div>
+              <div><span>03</span><p>Build basic agent</p></div>
+              <div><span>04</span><p>Extend agent</p></div>
+              <div><span>05</span><p>Wrap-up</p></div>
+            </div>
+            <div class="workshop-cta">
+              <span>Start here</span>
+              <code>github.com/kuroxx/multi-channel-ai-agent-workshop</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="controls" aria-label="Slide controls">
+      <button type="button" data-dir="-1" aria-label="Previous slide">&lt;</button>
+      <button type="button" data-dir="1" aria-label="Next slide">&gt;</button>
+    </div>
+    <button
+      class="export-pdf-button"
+      type="button"
+      aria-label="Export slides to PDF"
+      title="Export slides to PDF"
+    >
+      Export PDF
+    </button>
+
+    <script src="deck.js" defer></script>
+  </body>
+</html>
