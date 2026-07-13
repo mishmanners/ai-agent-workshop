@@ -10,8 +10,10 @@ This repository contains the materials and steps for the **Build a Multi-Channel
 You will need:
 
 - Python 3.10+
-- OpenAI API key
 - [ngrok](https://ngrok.com/) or similar for local webhook testing
+- [Upgraded Twilio account](https://help.twilio.com/articles/223183208-Upgrading-to-a-paid-Twilio-Account) and [new Twilio Console access](https://www.twilio.com/en-us/changelog/new-twilio-console-is-now-generally-available) (you will create these during this workshop)
+- OpenAI API key
+
 
 > [!TIP]
 > **Bring your own AI**: This workshop uses OpenAI, but Twilio Agent Connect is LLM agnostic. You can swap the LLM provider by changing the message handler logic.
