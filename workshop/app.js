@@ -189,7 +189,7 @@ function parseFrontmatter(markdown) {
 }
 
 function parseQuiz(markdown) {
-  const match = markdown.match(/^## Quiz\n([\s\S]*)$/m);
+  const match = markdown.match(/^## Quiz\r?\n([\s\S]*)$/m);
   if (!match) return null;
 
   const lines = match[1].trim().split("\n").map((line) => line.trim()).filter(Boolean);
@@ -328,7 +328,7 @@ function parseStep(section) {
 
 function parseChapterMarkdown(markdown) {
   const { metadata, body } = parseFrontmatter(markdown);
-  const bodyWithoutQuiz = body.replace(/^## Quiz\n[\s\S]*$/m, "").trim();
+  const bodyWithoutQuiz = body.replace(/^## Quiz\r?\n[\s\S]*$/m, "").trim();
   const sections = bodyWithoutQuiz.split(/^## Step:\s+/m);
   const intro = sections.shift().trim();
 

@@ -7,8 +7,7 @@ badge: 2
 
 ## Step: Clone Repository and Install Dependencies
 
-Get the workshop code onto your machine, then install the Python packages the
-agent needs.
+Let's get the workshop code onto your machine, then install the Python packages the agent needs.
 
 1. Clone the repository if you have not already done so.
 
@@ -27,13 +26,16 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-Use `python3` to create the virtual environment. After activation, use `python`
-and `python -m pip`; both commands will point to the Python 3 interpreter inside
-`.venv`.
+Use `python3` to create the virtual environment. After activation, use `python` and `python -m pip`; both commands will point to the Python 3 interpreter inside `.venv`. Note if you are using a Windows machine, you might need to use:
+
+```bash label="Terminal"
+python -m venv .venv
+source .venv/bin/activate
+```
 
 3. Install the required Python packages.
 
-This installs the packages listed in `requirements.txt`:
+The command below will install the packages listed in `requirements.txt`, which are:
 
 - [Twilio Agent Connect SDK](https://github.com/twilio/twilio-agent-connect-python): connects your app to Twilio channels, TAC memory, and the FastAPI server helpers.
 - [OpenAI Python SDK](https://github.com/openai/openai-python): sends messages to the OpenAI Responses API.
@@ -44,13 +46,12 @@ This installs the packages listed in `requirements.txt`:
 python -m pip install -r requirements.txt
 ```
 
-When the install finishes, keep the virtual environment active for the rest of
-the workshop. Your terminal prompt may show `(.venv)` while it is active.
+When the install finishes, keep the virtual environment active for the rest of the workshop. Your terminal prompt may show `(.venv)` while it is active.
 
 
 ## Step: Configure Environment Variables
 
-Create a local `.env` file and add your OpenAI API key first.
+Create a local `.env` file and add your OpenAI API key first. Do this by:
 
 1. Copy `.env.example` to `.env`.
 2. Add your OpenAI API key.
@@ -65,11 +66,10 @@ OPENAI_API_KEY=sk-proj-...
 
 ## Step: Configure Twilio Account
 
-[Sign in to Twilio](https://console.twilio.com/) or [create a new account](https://www.twilio.com/try-twilio
-) before configuring the Twilio resources used by TAC.
+[Sign in to Twilio](https://console.twilio.com/) or [create a new account](https://www.twilio.com/try-twilio) before configuring the Twilio resources used by TAC.
 
 1. Open the Twilio Console.
-2. Upgrade your account with the workshop promo code.
+2. Upgrade your account using the workshop promo code.
 3. [Create a Standard API Key](https://www.twilio.com/docs/iam/api-keys/keys-in-console#create-an-api-key-in-twilio-console) and copy your keys into `TWILIO_API_KEY` and `TWILIO_API_SECRET`.
 4. [Copy your Account SID and Auth Token](https://help.twilio.com/articles/223136027-Auth-Tokens-and-How-to-Change-Them) into `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN`.
 5. [Buy a phone number](https://help.twilio.com/articles/223135247) with Voice and SMS capabilities. Copy the phone number into your .env
@@ -87,9 +87,7 @@ TWILIO_PHONE_NUMBER=+447700900123
 
 Create a [Conversation Configuration](https://www.twilio.com/docs/conversations/orchestrator/concepts/core) with memory enabled. This tells Twilio which phone number belongs to your agent, how to group messages and calls into conversations, and where to store conversation memory.
 
-For this workshop, grouping by **Address** is important: SMS and Voice from the
-same phone number can resolve to the same participant context, so the agent can
-remember something learned over SMS when that person calls later.
+For this workshop, grouping by **Address** is important: SMS and Voice from the same phone number can resolve to the same participant context. Thus, the agent can remember something that is learned via SMS, and then also learn something about the person when that came person calls in later.
 
 1. In [Twilio Console](https://console.twilio.com/), go to Products & Services -> Conversation Orchestrator -> Conversation Configurations.
 2. Click top right button: `Create a Conversation configuration`.
@@ -118,12 +116,9 @@ TWILIO_CONVERSATION_CONFIGURATION_ID=conv_configuration_xxxxx
 
 ## Step: Start ngrok
 
-Your agent runs on your laptop, but Twilio needs a public URL it can reach when
-someone sends a message or starts a phone call. ngrok creates a temporary public
-URL that forwards traffic to your local server on port 8000.
+Your agent runs on your laptop, but Twilio needs a public URL it can reach when someone sends a message or starts a phone call. ngrok creates a temporary public URL that forwards traffic to your local server, on port 8000.
 
-Set `TWILIO_VOICE_PUBLIC_DOMAIN` to your public hostname so TAC can build the
-Voice WebSocket URL for Twilio to stream live call audio to your app.
+Set `TWILIO_VOICE_PUBLIC_DOMAIN` to your public hostname so TAC can build the Voice WebSocket URL for Twilio to stream live call audio to your app. You can do this by following the steps below:
 
 > [!IMPORTANT]
 > Use ngrok only for local development and workshop testing. For production,
@@ -177,9 +172,7 @@ twilio plugins:install @twilio-labs/plugin-dev-phone
 twilio dev-phone
 ```
 
-Dev Phone opens at `http://localhost:3001/` with a browser dial pad. Use it to
-make a browser-based test call. Press `Ctrl+C` in the terminal when you are done
-with Dev Phone.
+Dev Phone opens at `http://localhost:3001/` with a browser dial pad. Use it to make a browser-based test call. Press `Ctrl+C` in the terminal when you are done with Dev Phone. Note that you will need a separe Twilio phone number in order to use the Twilio Dev Phone.
 
 ## Step: Quiz 
 
