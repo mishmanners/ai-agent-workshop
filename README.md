@@ -9,10 +9,10 @@ This repository contains the materials and steps for the **Build a Multi-Channel
 
 You will need:
 
-- Python 3.10+
+- Python 3.10+. If you don't have Python, head to the [download page](https://www.python.org/downloads/release).
 - [ngrok](https://ngrok.com/) or similar for local webhook testing
 - [Upgraded Twilio account](https://help.twilio.com/articles/223183208-Upgrading-to-a-paid-Twilio-Account) and [new Twilio Console access](https://www.twilio.com/en-us/changelog/new-twilio-console-is-now-generally-available) (you will create these during this workshop)
-- OpenAI API key
+- OpenAI API key (we'll provide one for you to use in the workshop)
 
 
 > [!TIP]
@@ -43,7 +43,7 @@ You will need:
 Use the browser workshop guide if you want the guided UI:
 
 ```bash
-python3 -m http.server 8765
+python -m http.server 8765
 ```
 
 Then open [http://localhost:8765/workshop/](http://localhost:8765/workshop/).
@@ -57,7 +57,7 @@ Use [final/](./final/) as the reference implementation when you want to compare 
 
 ## Feedback
 
-If you want, please share any feedback to help me improve this workshop for next time. Use [this form](https://forms.gle/UVynw9wwdoKZkRp57) to drop your feedback (1 min).
+If you want, please share any feedback to help us improve this workshop. Use [this form](https://forms.gle/UVynw9wwdoKZkRp57), it only takes a minute.
 
 ## License
 
