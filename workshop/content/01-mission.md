@@ -7,7 +7,7 @@ badge: 1
 
 ## Step: Your Mission
 
-You will build one AI Agent who remembers you across different communication channels including: SMS, Voice and Webchat with shared memory using [Twilio Agent Connect (TAC)](https://www.twilio.com/docs/conversations/agent-connect), [OpenAI](https://developers.openai.com/api/reference/responses/overview), and FastAPI.
+You will build one AI Agent who remembers you across different communication channels including: SMS, Voice, and Webchat with shared memory using [Twilio Agent Connect (TAC)](https://www.twilio.com/docs/conversations/agent-connect), [OpenAI](https://developers.openai.com/api/reference/responses/overview), and FastAPI.
 
 
 ```component name="system-overview"
