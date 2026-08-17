@@ -9,24 +9,23 @@ The build starts from `build/step1_voice_sms.py` and ends with the reference imp
 
 ## Step: Create the Server
 
-Create the smallest runnable TAC app first. At this point, the server can boot,
-but it does not know how to respond to SMS or Voice yet.
+Let's create the smallest runnable TAC app first. At this point, the server can boot, but it does not know how to respond to SMS or Voice yet. Follow these steps:
 
 1. Open `build/step1_voice_sms.py`.
-2. Load environment variables and create a logger.
+2. Load environment variables and create a logger:
 
 ```python label="Setup"
 load_dotenv()
 logger = get_logger(__name__)
 ```
 
-3. Add TAC client
+3. Add TAC client:
 
 ```python label="Setup"
 tac = TAC(config=TACConfig.from_env())
 ```
 
-4. Start the local server.
+4. Start the local server:
 
 ```python label="Setup"
 if __name__ == "__main__":
@@ -36,7 +35,7 @@ if __name__ == "__main__":
     server.start()
 ```
 
-Run this command from the same terminal where `.venv` is active.
+Run this command from the same terminal where `.venv` is active:
 
 ```bash label="Terminal"
 python build/step1_voice_sms.py
@@ -54,20 +53,14 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-If the server does not start, fix `.env` or dependency setup before adding
-channels. This checkpoint only proves the app can load configuration and boot.
+If the server does not start, fix `.env` or dependency setup before adding channels. This checkpoint only proves the app can load configuration and boot.
 
 
 ## Step: Add SMS and Voice
 
-SMS and Voice are two ways a user can reach your agent. TAC handles the
-channel-specific details for each one, so your code can work with the same simple
-shape: receive a plain text string and returns a reply.
+Now let's add SMS and Voice, as these are two ways a user can reach your agent. TAC handles the channel-specific details for each one, so your code can work with the same lightweight shape: receive a plain text string and returns a reply.
 
-`context.channel` tells your handler whether the message came from `sms`,
-`voice`, or another channel. `memory_mode="always"` asks TAC to retrieve memory
-on every SMS message and Voice utterance, which lets the agent remember something
-learned over SMS when the same person calls later.
+`context.channel` tells your handler whether the message came from `sms`, `voice`, or another channel. `memory_mode="always"` asks TAC to retrieve memory on every SMS message and Voice utterance, which enables the agent to remember something learned over SMS, and then again when the same person calls later.
 
 1. Add SMS and voice channels
 ```python label="Channels"
@@ -75,7 +68,7 @@ sms_channel = SMSChannel(tac, config=SMSChannelConfig(memory_mode="always"))
 voice_channel = VoiceChannel(tac, config=VoiceChannelConfig(memory_mode="always"))
 ```
 
-Start the server with both channels.
+Start the server with both channels:
 
 ```python label="Server"
 server = TACFastAPIServer(
@@ -86,7 +79,7 @@ server = TACFastAPIServer(
 server.start()
 ```
 
-2. Configure Twilio webhooks in two places.
+2. Configure Twilio webhooks in two places
 
 In the [Twilio Console](https://console.twilio.com/):
 
@@ -112,11 +105,10 @@ Voice audio:       wss://<ngrok-domain>/ws
 
 ## Step: Write the handle_message_ready
 
-The same function handles SMS messages and transcribed Voice input. TAC calls it
-when a message is ready for your agent.
+The same function handles SMS messages and transcribed Voice input. TAC calls it when a message is ready for your agent.
 
 
-1. Add handle_message_ready
+1. Add handle_message_ready:
 
 ```python label="Handler"
 async def handle_message_ready(
@@ -137,16 +129,12 @@ async def handle_message_ready(
     return "Hello back"
 ```
 
-`ConversationSession` tells you where the message came from. Use it to get the
-stable `conversation_id`, check `context.channel`, and keep SMS and Voice in the
-same handler.
+`ConversationSession` tells you where the message came from. Use it to get the stable `conversation_id`, check `context.channel`, and keep SMS and Voice in the same handler.
 
-`memory_response` contains memory TAC retrieved for this turn. In this step,
-log the message and return a static response first. In the next step, you will
-pass `memory_response` into OpenAI.
+`memory_response` contains memory TAC retrieved for this turn. In this step, log the message and return a static response first. In the next step, you will pass `memory_response` into OpenAI.
 
 
-2. Register the handler with TAC.
+2. Register the handler with TAC:
 
 ```python label="Register"
 tac.on_message_ready(handle_message_ready)
@@ -163,24 +151,23 @@ Hi, I'm <YOUR-NAME>.
 
 ## Step: Add OpenAI and TAC Memory
 
-Now replace the static `"Hello back"` response with an OpenAI response that can
-use TAC memory.
+Now replace the static `"Hello back"` response with an OpenAI response that can use TAC memory.
 
-There are two kinds of context in this step:
+There are two types of context in this step:
 
 - `conversation_history` keeps the recent OpenAI turns for the current conversation.
 - TAC memory stores longer-lived observations, summaries, and preferences across turns and channels.
 
 TAC handles [memory management](https://www.twilio.com/docs/conversations/agent-connect/core-concepts#memory-management) for you. When memory is configured, TAC retrieves relevant context and passes it into `handle_message_ready` as `memory_response`.
 
-1. Add the OpenAI client and model name.
+1. Add the OpenAI client and model name:
 
 ```python label="Python"
 MODEL = os.environ.get("OPENAI_MODEL_NAME", "gpt-5.4-mini")
 openai_client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 ```
 
-2. Add system instructions.
+2. Add system instructions:
 
 ```python label="Prompt"
 SYSTEM_INSTRUCTIONS = """
@@ -196,7 +183,7 @@ IMPORTANT - Response formatting by channel:
 """
 ```
 
-3. Replace the static response in `handle_message_ready`.
+3. Replace the static response in `handle_message_ready`:
 
 ```python label="Handler"
 try:
@@ -233,9 +220,7 @@ except Exception as exc:
     return "Sorry, I encountered an error. Please try again."
 ```
 
-`with_tac_memory(...)` injects `memory_response` into the OpenAI request, so you
-do not need to manually build a memory prompt. Returning a string is enough for
-SMS and Voice; TAC sends it back through the same channel the user came from.
+`with_tac_memory(...)` injects `memory_response` into the OpenAI request, so you do not need to manually build a memory prompt. Returning a string is enough for SMS and Voice; TAC sends it back through the same channel the user came from.
 
 > [!NOTE]
 > TAC supports several [memory retrieval patterns](https://www.twilio.com/docs/conversations/agent-connect/memory-and-tool-patterns#memory-retrieval-patterns): automatic channel retrieval, manual retrieval inside your handler, and tool-based retrieval. This workshop uses automatic retrieval with `memory_mode="always"` and `with_tac_memory(...)`.
@@ -245,28 +230,23 @@ SMS and Voice; TAC sends it back through the same channel the user came from.
 Restart your server and test the OpenAI response: 
 
 ```text label="Test"
-Message 1: Hi, I'm <YOUR-NAME>. I'm planning a trip to Berlin.
-Expected: The agent replies with a personalized trip-planning response.
+Message 1: Hi, I'm <YOUR-NAME>. I'm planning a trip to Japan.
+Expected: The agent replies with a personalised trip-planning response.
 
 Message 2: What city am I planning to visit?
-Expected: The agent answers Berlin.
+Expected: The agent answers Japan.
 ```
 
-If Message 1 still returns `Hello back`, the handler has not been updated to call
-OpenAI yet. 
+If Message 1 still returns `Hello back`, the handler has not been updated to call OpenAI yet. 
 
-If Message 2 does not mention Berlin, check that SMS reached
-`handle_message_ready`, `conversation_history` is being updated, `memory_mode="always"`
-is set, and the Conversation Configuration has a Memory Store attached.
+If Message 2 does not mention Japan, check that SMS reached `handle_message_ready`, `conversation_history` is being updated, `memory_mode="always"` is set, and the Conversation Configuration has a Memory Store attached.
 
 
 ## Step: Clean Up Local Conversation History
 
-TAC memory can persist useful long-term context, but `conversation_history` is
-only local short-term OpenAI context. Remove it when TAC marks the conversation
-as ended.
+TAC memory can persist useful long-term context, but `conversation_history` is only local short-term OpenAI context. Remove it when TAC marks the conversation as ended.
 
-1. Add a conversation-ended handler.
+1. Add a conversation-ended handler:
 
 ```python label="Cleanup"
 async def handle_conversation_ended(context: ConversationSession) -> None:
@@ -278,7 +258,7 @@ async def handle_conversation_ended(context: ConversationSession) -> None:
     conversation_history.pop(context.conversation_id, None)
 ```
 
-2. Register it with TAC.
+2. Register it with TAC:
 
 ```python label="Register cleanup"
 tac.on_conversation_ended(handle_conversation_ended)
