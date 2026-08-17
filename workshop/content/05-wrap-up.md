@@ -76,6 +76,6 @@ From here, you can expand on this workshop agent into a more capable product exp
 
 
 
-## Step: Leave Your Feedback (~1 min)
+## Step: Leave Your Feedback
 
 If you want, let us know how this workshop experience was by [filling in this form](https://forms.gle/UVynw9wwdoKZkRp57).

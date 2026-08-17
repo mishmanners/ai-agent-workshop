@@ -276,6 +276,12 @@ Hi, do you know who I am?
 Expected result: the agent should know the name you sent over SMS and respond naturally, for example, "Hey `<YOUR-NAME>`, thanks for calling."
 
 
+## Step: Congratulations
+
+Congrats! You've now made a basic agent that can accept inbound calls and texts with a shared TAC handler. If you want to continue and build your agent further, you can do so by completing the quiz, and then clicking on "Extend Agent" in the header.
+
+## Step: Quiz 
+
 ## Quiz
 Question: Which function receives both SMS text and transcribed Voice input?
 - handle_message_ready *

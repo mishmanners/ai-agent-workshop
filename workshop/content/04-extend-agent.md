@@ -146,6 +146,7 @@ Expected: The agent remembers your name, Berlin, and boutique hotels.
 
 If Web Chat does not share memory, check that the browser identity matches your phone number, the Conversation Configuration includes chat traffic, and `TWILIO_CONVERSATIONS_SERVICE_SID` is set.
 
+## Step: Quiz 
 
 ## Quiz
 Question: Why should Web Chat use the user's phone number as its identity?
