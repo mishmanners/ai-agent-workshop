@@ -9,7 +9,7 @@ badge: 2
 
 Let's get the workshop code onto your machine, then install the Python packages the agent needs.
 
-1. Clone the repository if you have not already done so.
+1. Clone the repository if you have not already done so:
 
 ```bash label="Terminal"
 git clone git@github.com:kuroxx/multi-channel-ai-agent-workshop.git
@@ -19,7 +19,7 @@ cd multi-channel-ai-agent-workshop
 If you already cloned it, open a terminal in your existing
 `multi-channel-ai-agent-workshop` folder.
 
-2. Create and activate a Python virtual environment.
+2. Create and activate a Python virtual environment:
 
 ```bash label="Terminal"
 python3 -m venv .venv
@@ -33,7 +33,7 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-3. Install the required Python packages.
+3. Install the required Python packages
 
 The command below will install the packages listed in `requirements.txt`, which are:
 
@@ -125,9 +125,9 @@ Set `TWILIO_VOICE_PUBLIC_DOMAIN` to your public hostname so TAC can build the Vo
 > deploy the agent to a real hosted environment and configure Twilio with that
 > production domain.
 
-1. Start ngrok against port 8000.
-2. Copy the hostname only into `TWILIO_VOICE_PUBLIC_DOMAIN` in `.env`. Do not include `https://`.
-3. Leave ngrok running while you test SMS, Voice, or Web Chat later in this workshop.
+1. Start ngrok against port 8000
+2. Copy the hostname only into `TWILIO_VOICE_PUBLIC_DOMAIN` in `.env`. Do not include `https://`
+3. Leave ngrok running while you test SMS, Voice, or Web Chat later in this workshop
 
 ```bash label="Terminal"
 ngrok http 8000
@@ -147,7 +147,7 @@ The [Twilio Dev Phone](https://www.twilio.com/docs/labs/dev-phone) lets you make
 > `TWILIO_PHONE_NUMBER`, because Dev Phone will overwrite the webhook settings
 > needed by the TAC agent.
 
-1. Install the Twilio CLI.
+1. Install the Twilio CLI:
 
 **macOS (Homebrew)**:
 ```bash label="macOS"
@@ -159,13 +159,13 @@ brew tap twilio/brew && brew install twilio
 npm install -g twilio-cli
 ```
 
-2. Log in with your Account SID, API Key SID, and API Key Secret.
+2. Log in with your Account SID, API Key SID, and API Key Secret:
 
 ```bash label="Terminal"
 twilio login
 ```
 
-3. Install and start Dev Phone.
+3. Install and start Dev Phone:
 
 ```bash label="Terminal"
 twilio plugins:install @twilio-labs/plugin-dev-phone
