@@ -10,9 +10,7 @@ badge: 5
 You built one AI Agent that can keep contextual memory across SMS, Voice, and Web Chat.
 Even though those channels work differently, your app uses one shared handler: `handle_message_ready(...)`.
 
-TAC turns each incoming message or voice utterance into text for your handler.
-Your handler sends that text to OpenAI, uses TAC memory for helpful context, and
-returns a reply through the same channel the user came from.
+TAC turns each incoming message or voice utterance into text for your handler. Your handler sends that text to OpenAI, uses TAC memory for helpful context, and returns a reply through the same channel the user came from.
 
 ```text label="Core pattern"
 User contacts the agent
@@ -24,16 +22,16 @@ User contacts the agent
 
 **Major Takeaways**
 
-- How to connect one LLM-powered agent to multiple communication channels.
-- Why an orchestration layer saves development time by handling channel plumbing.
-- How built-in conversation memory reduces custom state management.
-- When a managed conversation platform is a good fit for multi-channel AI projects.
+- How to connect one LLM-powered agent to multiple communication channels
+- Why an orchestration layer saves development time by handling channel plumbing
+- How built-in conversation memory reduces custom state management
+- When a managed conversation platform is a good fit for multi-channel AI projects
 
 ## Step: What's Next?
 
 From here, you can expand on this workshop agent into a more capable product experience.
 
-1. Add function calling capabilities.
+1. Add function calling capabilities
 
    Let the agent call tools for hotel search, flight lookup, weather, restaurant
    recommendations, or booking handoff. 
@@ -41,7 +39,7 @@ From here, you can expand on this workshop agent into a more capable product exp
    Start with the [OpenAI Function Calling](https://developers.openai.com/api/docs/guides/function-calling)
    and add tools around the external APIs your app needs.
 
-2. Add more communication channels.
+2. Add more communication channels
 
    The same handler pattern can expand beyond SMS, Voice, and Web Chat. 
    
@@ -52,10 +50,9 @@ From here, you can expand on this workshop agent into a more capable product exp
    and [TAC examples](https://github.com/twilio/twilio-agent-connect-python/tree/main/getting_started/examples)
    to see how other channels fit into the same architecture.
 
-3. Stream responses for lower Voice latency.
+3. Stream responses for lower Voice latency
 
-   For phone calls, streaming can make the agent feel more natural because the
-   caller hears the first words sooner. 
+   For phone calls, streaming can make the agent feel more natural because the caller hears the first words sooner. 
 
    Use [TAC examples](https://github.com/twilio/twilio-agent-connect-python/tree/main/getting_started/examples) as a starting point for streaming patterns.
 
@@ -65,7 +62,7 @@ From here, you can expand on this workshop agent into a more capable product exp
 
     Explore using [Conversation Intelligence](https://www.twilio.com/docs/conversations/intelligence) in relation to [Conversation Orchestrator](https://www.twilio.com/docs/conversations/intelligence/create-intelligence-configuration#why-use-conversation-orchestrator-with-conversation-intelligence).  
 
-5. Deploy the agent to production.
+5. Deploy the agent to production
 
    See the [AWS Fargate](https://www.twilio.com/docs/conversations/agent-connect/integrations/aws/deploy) and [Azure Container Apps](https://www.twilio.com/docs/conversations/agent-connect/integrations/microsoft-foundry/deploy) deployment guides.
 

@@ -9,13 +9,11 @@ In this chapter, add Web Chat as a third channel on the same TAC handler. Use th
 
 ## Step: Create Conversations Service
 
-Web Chat uses a [Twilio Conversations (classic) Service](https://www.twilio.com/docs/conversations-classic/api). This is separate from Conversation
-Orchestrator: the service powers browser chat, while the [Conversation
-Configuration](https://www.twilio.com/docs/conversations/orchestrator/concepts/core) connects that chat traffic to [TAC](https://www.twilio.com/docs/conversations/agent-connect/overview).
+Web Chat uses a [Twilio Conversations (classic) Service](https://www.twilio.com/docs/conversations-classic/api). This is separate from Conversation Orchestrator: the service powers browser chat, while the [Conversation Configuration](https://www.twilio.com/docs/conversations/orchestrator/concepts/core) connects that chat traffic to [TAC](https://www.twilio.com/docs/conversations/agent-connect/overview).
 
-1. Go to Twilio Console -> Products & Services -> Conversations (classic) -> Services.
-2. Create a Conversations Service named `tac-workshop`.
-3. Copy the Service SID (`IS...`) into `.env`.
+1. Go to Twilio Console -> Products & Services -> Conversations (classic) -> Services
+2. Create a Conversations Service named `tac-workshop`
+3. Copy the Service SID (`IS...`) into `.env`
 
 ```env label=".env"
 TWILIO_CONVERSATIONS_SERVICE_SID=ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -23,8 +21,7 @@ TWILIO_CONVERSATIONS_SERVICE_SID=ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ## Step: Configure Chat Traffic
 
-Connect the Conversations Service you created in this chapter to the same
-Conversation Configuration used by SMS and Voice.
+Connect the Conversations Service you created in this chapter to the same Cnversation Configuration used by SMS and Voice:
 
 1. Go to Twilio Console -> Conversation Orchestrator -> Conversation Configurations.
 2. Open `tac-workshop`.
@@ -39,7 +36,7 @@ Conversation Configuration used by SMS and Voice.
 Start from `build/step2_add_chat.py`. Web Chat uses Twilio Conversations in the browser, but TAC still routes messages into the same `handle_message_ready(...)` callback.
 
 
-1. Create the Chat channel alongside SMS and Voice.
+1. Create the Chat channel alongside SMS and Voice
 
 ```python label="Channels"
 sms_channel = SMSChannel(tac, config=SMSChannelConfig(memory_mode="always"))
@@ -50,7 +47,7 @@ chat_channel = ChatChannel(tac, config=ChatChannelConfig(
 ))
 ```
 
-2. Register Chat as a messaging channel.
+2. Register Chat as a messaging channel
 
 ```python label="Server"
 server = TACFastAPIServer(
@@ -66,18 +63,16 @@ server = TACFastAPIServer(
 
 ## Step: Serve the Web Chat UI
 
-The browser chat UI is a normal static page in `build/public/index.html`. Add
-these routes after `server = TACFastAPIServer(...)` because that object owns the
-FastAPI app where both TAC routes and custom routes live.
+The browser chat UI is a normal static page in `build/public/index.html`. Add these routes after `server = TACFastAPIServer(...)` because that object owns the FstAPI app where both TAC routes and custom routes live:
 
-1. Mount the `public` directory before `server.start()`.
+1. Mount the `public` directory before `server.start()`
 
 ```python label="Static files"
 static_dir = Path(__file__).parent / "public"
 server.app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 ```
 
-2. Serve the chat page from `/` on the same FastAPI app.
+2. Serve the chat page from `/` on the same FastAPI app
 
 ```python label="Home route"
 @server.app.get("/")
@@ -85,7 +80,7 @@ async def index() -> FileResponse:
     return FileResponse(str(static_dir / "index.html"))
 ```
 
-3. Start the app, then open the chat UI.
+3. Start the app, then open the chat UI
 
 ```text label="Browser"
 http://localhost:8000
@@ -93,11 +88,9 @@ http://localhost:8000
 
 ## Step: Add Browser Authentication
 
-The browser cannot use your Twilio credentials directly. Add `/token` after the
-UI routes so the server can mint a short-lived Twilio Conversations access token
-for the selected chat identity.
+The browser cannot use your Twilio credentials directly. Add `/token` after the UI routes so the server can mint a short-lived Twilio Conversations access token for the selected chat identity.
 
-1. Add the `/token` route before `server.start()`.
+1. Add the `/token` route before `server.start()`
 
 ```python label="Token route"
 @server.app.post("/token")
@@ -131,10 +124,10 @@ async def generate_token(request: Request) -> JSONResponse:
 
 Use the same phone number identity across SMS, Voice, and Web Chat.
 
-1. Send SMS with your name and trip destination.
-2. Call from the same phone number and add a preference.
-3. Open Web Chat and use the same phone number as your identity.
-4. Ask the agent what it remembers.
+1. Send SMS with your name and trip destination
+2. Call from the same phone number and add a preference
+3. Open Web Chat and use the same phone number as your identity
+4. Ask the agent what it remembers
 
 ```text label="Scenario"
 SMS: Hi, I'm <YOUR-NAME>. I'm planning a trip to Berlin.
